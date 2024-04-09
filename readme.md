@@ -3,6 +3,7 @@
   </br>
   <p>My communication channel :<a href="https://t.me/cliptalk">https://t.me/cliptalk</a>
 </div>
+
 ### Project Introduction:
 This is a 1:1 mirror version of the official Poe website, completely replicated.
 
@@ -30,8 +31,8 @@ git clone https://github.com/petiky/fkpoe.git
 ```
 #### 1.2 Deployment
 ```shell
-cd fkpoe
-vim docker-compose.yml
+mv .env.example .env
+vim .env
 # Modify LOCAL_BASE_URL to your domain name
 docker-compose up -d
 ```

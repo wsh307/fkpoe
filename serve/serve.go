@@ -45,10 +45,6 @@ func forwardRequest(c *fiber.Ctx, url string) error {
 		return err
 	}
 	req.Header = utls.GetBrowserFrom(c)
-	//fmt.Print(os.Getenv("PB_COOKIE"))
-	//if os.Getenv("PB_COOKIE") != "" {
-	//	req.Header.Add("Cookie", "p-b:"+os.Getenv("PB_COOKIE"))
-	//}
 	res, err := client.Do(req)
 	if err != nil {
 		fmt.Printf("Failed to send request: %v\n", err)

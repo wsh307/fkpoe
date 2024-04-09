@@ -26,7 +26,8 @@ git clone https://github.com/petiky/fkpoe.git
 #### 1.2 部署
 ```shell
 cd fkpoe
-vim docker-compose.yml
+mv .env.example .env
+vim .env
 # 修改 LOCAL_BASE_URL 为你的域名
 docker-compose up -d
 ```

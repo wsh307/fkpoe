@@ -31,8 +31,8 @@ func GetBrowserFrom(c *fiber.Ctx) http.Header {
 	sa := c.Request().Header.Peek("Sec-ch-ua")
 	ct := c.Request().Header.Peek("Content-Type")
 	var ck []byte
-	if os.Getenv("PB_COOKIE") != "" {
-		ck = append(ck, []byte("p-b="+os.Getenv("PB_COOKIE"))...)
+	if os.Getenv("PB_COOKIE") != "" && os.Getenv("PB_LAT_COOKIE") != "" {
+		ck = append(ck, []byte("p-b="+os.Getenv("PB_COOKIE")+";"+"p-lat="+os.Getenv("PB_LAT_COOKIE"))...)
 	} else {
 		ck = c.Request().Header.Peek("Cookie")
 	}
