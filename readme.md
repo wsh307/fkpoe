@@ -31,6 +31,7 @@ git clone https://github.com/petiky/fkpoe.git
 ```
 #### 1.2 Deployment
 ```shell
+cd fkpoe
 mv .env.example .env
 vim .env
 # Modify LOCAL_BASE_URL to your domain name
@@ -38,6 +39,7 @@ docker-compose up -d
 ```
 or
 ```shell
+cd fkpoe
 mv .env.example .env
 vim .env
 # Modify LOCAL_BASE_URL to your domain name

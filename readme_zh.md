@@ -33,6 +33,7 @@ docker-compose up -d
 ```
 或者
 ```shell
+cd fkpoe
 mv .env.example .env
 vim .env
 # 修改 LOCAL_BASE_URL 为你的域名
