@@ -54,6 +54,10 @@ func forwardRequest(c *fiber.Ctx, url string) error {
 
 	cookies := make(map[string]*fiber.Cookie)
 	for _, cookie := range res.Cookies() {
+		fmt.Printf(cookie.Name + "\n")
+		if cookie.Name == "p-b" {
+			continue
+		}
 		cookies[cookie.Name] = &fiber.Cookie{
 			Name:     cookie.Name,
 			Value:    cookie.Value,
@@ -81,6 +85,7 @@ func forwardRequest(c *fiber.Ctx, url string) error {
 		}
 		c.Status(res.StatusCode)
 		for _, cookie := range cookies {
+
 			c.Cookie(cookie)
 		}
 		c.Set("Location", localURL)
@@ -142,11 +147,6 @@ func forwardRequest(c *fiber.Ctx, url string) error {
 			return nil
 		} else {
 			c.Status(res.StatusCode)
-			for key, values := range res.Header {
-				for _, value := range values {
-					c.Set(key, value)
-				}
-			}
 			for _, cookie := range cookies {
 				c.Cookie(cookie)
 			}

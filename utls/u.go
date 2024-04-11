@@ -1,6 +1,7 @@
 package utls
 
 import (
+	"fmt"
 	http "github.com/bogdanfinn/fhttp"
 	"github.com/bogdanfinn/tls-client/profiles"
 	"github.com/gofiber/fiber/v2"
@@ -30,11 +31,11 @@ func GetBrowserFrom(c *fiber.Ctx) http.Header {
 	encoding := c.Request().Header.Peek("Accept-Encoding")
 	sa := c.Request().Header.Peek("Sec-ch-ua")
 	ct := c.Request().Header.Peek("Content-Type")
-	var ck []byte
+	var ck string
 	if os.Getenv("PB_COOKIE") != "" && os.Getenv("PB_LAT_COOKIE") != "" {
-		ck = append(ck, []byte("p-b="+os.Getenv("PB_COOKIE")+";"+"p-lat="+os.Getenv("PB_LAT_COOKIE"))...)
+		ck = fmt.Sprintf("p-b=%s; p-lat=%s", os.Getenv("PB_COOKIE"), os.Getenv("PB_LAT_COOKIE"))
 	} else {
-		ck = c.Request().Header.Peek("Cookie")
+		ck = string(c.Request().Header.Peek("Cookie"))
 	}
 	PoeTagId := c.Request().Header.Peek("Poe-Tag-Id")
 	poeFormkey := c.Request().Header.Peek("Poe-Formkey")
@@ -45,7 +46,7 @@ func GetBrowserFrom(c *fiber.Ctx) http.Header {
 		"user-agent":         {string(ua)},
 		"sec-ch-ua":          {string(sa)},
 		"Content-Type":       {string(ct)},
-		"cookie":             {string(ck)},
+		"cookie":             {ck},
 		"sec-ch-ua-mobile":   {"?0"},
 		"Sec-ch-ua-platform": {string(platform)},
 		"accept-encoding":    {string(encoding)},
